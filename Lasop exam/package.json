@@ -1,0 +1,11 @@
+{
+  "name": "BLOG SITE",
+  "version": "1.0.0",
+  "description": "Blog Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BY ADEMOLA",
+  "license": "ISC"
+}

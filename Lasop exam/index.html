@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+
+<!-- 
+
+
+        HTML
+
+1 a
+
+2 c
+
+3 a
+
+4 a
+
+5 d
+
+6 a
+
+7 a
+
+8 Doctype is use for specificing the type of markup language you want to use to create a webpage
+
+9 Because the Broswer load our code from top to bottom, So it is to avoid slowing down of code
+
+10 b
+
+
+      CSS
+
+
+1 c
+
+2 c
+
+3 a
+
+4 a
+
+5 cascading style sheets
+
+6 a
+
+7 
+
+8 d
+
+9 c
+
+10 cover is use to occupy a specific width giving an image , while contain is used to also c
+
+
+         Boostarp
+
+1 c
+
+2 D
+
+3 c
+
+4
+
+5 c
+
+6 c
+
+7 c
+
+8 d
+
+9 c
+
+10 d
+ 
+
+           React Js
+
+1 c
+
+2 a
+
+3 c
+
+4 c
+
+5 a
+
+6 a
+
+7 
+
+8 c
+
+9 a
+
+10 b
+
+
+node js 
+
+(1)
+
+Node Js is a single thread application because it is s javascript liabary, and javascript is a single thread programming language
+
+(2)
+NPM INIT is used to set up a new package.json
+
+(Check package.json file to view)
+
+(3)
+ Nodemon is just like a tools that help develop Node.js based applications by automatically restarting the node when file code is change in the directory are detected
+
+
+ import express from "express"
+import dotenv from "dotenv"
+import cors from "cors"
+
+dotenv.config()
+
+const exam = express()
+
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+
+
+app.listen(process.env.PORT || 8000, () =>{
+    console.log(`listening on port ${process.env.PORT}`)
+})
+
+export default exam
+
+
+(4)
+
+import mysql from "mysql"
+import dotenv from "dotenv"
+
+dotenv.config()
+
+const connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "exam"
+});
+
+connection.connect((err) => {
+    if(err){
+        console.log(`Unable TO Connect to database ${err}`)
+    }else{
+        console.log("Connected TO Database")
+    }
+})
+
+
+
+5 B
+
+6 B
+
+(7)
+
+GET: A GET request retrieves data from a web server by specifying parameter in the url portion of the request
+
+POST: A POST request is use to send data in server
+
+DELETE: DELETE is to remove all current represention of the target resource given by a url
+
+(8)
+A Script from Front-end to BackEnd!!!
+
+./../Frontend
+
+
+
+(9)
+import express from "express";
+import Db from "./../Db.js";
+import bcrypt from "bcrypt";
+import formidable from "formidable";
+import path from "path";
+import fs from "fs";
+
+const router = express.Router();
+
+router.post("/signup", (req, res) => {
+  const { fname, lname, email, pwd } = req.body;
+
+  if (fname === "" || lname === "" || email === "" || pwd === "") {
+     res.status(203).json({ message: "Input Field Cannot Be Empty" });
+     
+
+  }else{
+    const sql = "SELECT * FROM users WHERE email = ?";
+
+    Db.query(sql, [email], (err, result) => {
+    
+        if (result[0] === undefined) {
+            const sql = "INSERT INTO users(firstName, lastName, email, password) VALUES(?,?,?,?)";
+      
+            bcrypt.hash(pwd, process.env.PWD_HASH, function (err, hash) {
+              if (err) {
+                console.log(err);
+              } else {
+                Db.query(sql, [fname, lname, email, hash], (err, result) => {
+                  if (err) {
+                    console.log({ message: err });
+                  } else {
+                  return  res.status(200).json({ message: "Account Successfully Created" });
+                  }
+                });
+              }
+            });
+          } else {
+            res.status(203).json({ message: "Email Already Exists" });
+          }
+    
+  });
+}
+  
+});
+
+
+
+(10)
+
+router.post("/login", (req, res) => {
+  const { email, pwd } = req.body;
+
+  if (email === "" || pwd === "") {
+    res.status(203).json({ message: "input field cannot be empty" });
+    
+  }else{
+    const sql = "SELECT * FROM users WHERE email = ?";
+
+    Db.query(sql, [email], (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        if(result[0] !== undefined){
+            bcrypt.compare(pwd, result[0].password, (err, realPwd) => {
+                if (err) {
+                  console.log(`error: ${err}`);
+                } else {
+                  if (realPwd === true) {
+                    
+                    res.status(200).json({ message: "login Successful", user: result[0]});
+                  } else {
+                    res.status(203).json({ message: "Incorrect Password" });
+                  }
+                }
+              });
+        }else{
+            res.status(203).json({ message: "Email Not Found" });
+        }
+      }
+    });
+  }
+  
+});
+
+
+
+ -->
+          <!-- Javasript -->
+
+<script src="./script.js"></script>
+
+</body>
+
+</html>
